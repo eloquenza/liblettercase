@@ -20,6 +20,12 @@ public:
     void add(const std::string new_word) {
         wordsToBeLeftInLowerCase.push_back(new_word);
     }
+
+    void remove(const std::string& word_to_delete) {
+        wordsToBeLeftInLowerCase.erase(
+                std::find(wordsToBeLeftInLowerCase.begin(), wordsToBeLeftInLowerCase.end(),
+                          word_to_delete));
+    }
 };
 
 std::vector<std::string> split(const std::string& s, char delimiter) {
