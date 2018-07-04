@@ -14,10 +14,11 @@ add_subdirectory(${CATCH2_MODULE})
 include_directories(${EXTERNAL_LIBS})
 include_directories(${INCLUDE_FOLDER})
 
-set(SOURCES ${SOURCE_FOLDER}/main.cpp
+set(SOURCES test/main.cpp
         ${LIB_HEADER}/ExceptionWords.h ${LIB_SOURCES}/ExceptionWords.cpp
         ${LIB_HEADER}/helper_functions.h ${LIB_SOURCES}/helper_functions.cpp
-        ${LIB_HEADER}/lettercase_conversions.h ${LIB_SOURCES}/lettercase_conversions.cpp)
+        ${LIB_HEADER}/lettercase_conversions.h ${LIB_SOURCES}/lettercase_conversions.cpp
+        test/test_conversions.cpp)
 
 add_executable(liblettercase ${SOURCES})
 
