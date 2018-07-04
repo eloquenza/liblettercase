@@ -33,4 +33,30 @@ namespace lettercase {
         }
         return construct_string_from_vector(splitted_text);
     }
+
+    std::string to_lowercase(const std::string& text) {
+        using namespace lettercase::detail;
+        auto splitted_text = split(text, ' ');
+
+        for (std::string& str: splitted_text) {
+           std::transform(str.begin(), str.end(), str.begin(),
+                [](unsigned char c) {
+                    return std::tolower(c);
+           });
+        }
+        return construct_string_from_vector(splitted_text);
+    }
+
+    std::string to_uppercase(const std::string& text) {
+        using namespace lettercase::detail;
+        auto splitted_text = split(text, ' ');
+
+        for (std::string& str: splitted_text) {
+            std::transform(str.begin(), str.end(), str.begin(),
+                           [](unsigned char c) {
+                               return std::toupper(c);
+                           });
+        }
+        return construct_string_from_vector(splitted_text);
+    }
 }
