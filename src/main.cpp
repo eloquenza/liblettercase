@@ -26,13 +26,22 @@ std::string construct_string_from_vector(const std::vector<std::string>& vec) {
 }
 
 std::string to_titlecase(const std::string& text) {
-auto splitted_text = split(text, ' ');
+    auto wordsToBeLeftInLowerCase = {
+            "a", "an", "the", "at", "by", "for", "in", "of",
+            "on", "to", "and", "as", "or"
+    };
+
+    auto splitted_text = split(text, ' ');
     for (std::string& str: splitted_text) {
-        std::transform(str.begin(), str.end(), str.begin(),
-                       [](unsigned char c) {
-                return std::tolower(c);
-            });
-        str[0] = std::toupper(str[0]);
+        if (std::find(wordsToBeLeftInLowerCase.begin(), wordsToBeLeftInLowerCase.end(), str) != wordsToBeLeftInLowerCase.end())  {
+            continue;
+        } else {
+            std::transform(str.begin(), str.end(), str.begin(),
+                           [](unsigned char c) {
+                               return std::tolower(c);
+                           });
+            str[0] = std::toupper(str[0]);
+        }
     }
     return construct_string_from_vector(splitted_text);
 }
