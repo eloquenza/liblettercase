@@ -16,6 +16,10 @@ public:
         };
     }
     explicit ExceptionWords(std::vector<std::string> newList) : wordsToBeLeftInLowerCase(newList) {}
+
+    void add(const std::string new_word) {
+        wordsToBeLeftInLowerCase.push_back(new_word);
+    }
 };
 
 std::vector<std::string> split(const std::string& s, char delimiter) {
