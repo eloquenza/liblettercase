@@ -76,7 +76,7 @@ std::string to_titlecase(const std::string& text, const ExceptionWords& wordList
     return construct_string_from_vector(splitted_text);
 }
 
-TEST_CASE("A string is written in Title Case", "[title-case]") {
+TEST_CASE("A string is converted to Title Case", "[title-case]") {
     std::string text = "The point is to get more experience with ranges and the STL.";
     auto wordList = ExceptionWords();
 
