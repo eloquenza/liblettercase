@@ -1,4 +1,4 @@
-Project idea was taken from [https://www.fluentcpp.com/2018/06/29/7-more-ways-to-get-better-at-c-this-summer-2018-edition/[(Fluent C++).
+Project idea was taken from [Fluent C++](https://www.fluentcpp.com/2018/06/29/7-more-ways-to-get-better-at-c-this-summer-2018-edition/).
 To perserve the exercise, an excerpt can be found here:
 
 # Project #2: Title Case
