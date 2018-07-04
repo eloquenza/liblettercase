@@ -47,10 +47,19 @@ std::string construct_string_from_vector(const std::vector<std::string>& vec) {
     return ret.str();
 }
 
-std::string to_titlecase(const std::string& text, const ExceptionWords& wordList) {
+std::string to_titlecase(const std::string& text, const ExceptionWords& wordList, bool keep_abbreviations) {
     auto splitted_text = split(text, ' ');
     auto& words_kept_in_lowercase = wordList.wordsToBeLeftInLowerCase;
     for (std::string& str: splitted_text) {
+        if (keep_abbreviations) {
+            auto is_any_lowercased = std::any_of(str.begin(), str.end(),
+                 [](unsigned char c) {
+                    return std::islower(c);
+                 });
+            if (!is_any_lowercased) {
+                continue;
+            }
+        }
         if (std::find(words_kept_in_lowercase.begin(), words_kept_in_lowercase.end(), str) != words_kept_in_lowercase.end())  {
             continue;
         } else {
@@ -65,14 +74,14 @@ std::string to_titlecase(const std::string& text, const ExceptionWords& wordList
 }
 
 int main() {
-    std::string text = "The point is to get more experience with ranges and the STL, "
-                       "design an clear API, and implement a library with expressive code. "
+    std::string text = "The point is to get more experience with ranges and the STL "
+                       "design an clear API and implement a library with expressive code. "
                        "All of which are precious tools for everyday work.";
 
     std::cout << "Sentence which will be Title Case'd:\n" << text
               << "\n\n";
 
     auto wordList = ExceptionWords();
-    std::cout << "Title Case'd sentence:\n" << to_titlecase(text, wordList);
+    std::cout << "Title Case'd sentence:\n" << to_titlecase(text, wordList, true);
     return 0;
 }
