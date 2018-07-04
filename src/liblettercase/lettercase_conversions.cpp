@@ -17,11 +17,7 @@ namespace lettercase {
         auto& words_kept_in_lowercase = wordList.wordsToBeLeftInLowerCase;
         for (std::string& str: splitted_text) {
             if (keep_abbreviations) {
-                auto is_any_lowercased = std::any_of(str.begin(), str.end(),
-                                                     [](unsigned char c) {
-                                                         return std::islower(c);
-                                                     });
-                if (!is_any_lowercased) {
+                if (!contains_any_lowercase(str)) {
                     continue;
                 }
             }

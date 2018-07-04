@@ -29,4 +29,11 @@ namespace lettercase::detail {
         ret << vec.back();
         return ret.str();
     }
+
+    bool contains_any_lowercase(const string& str) {
+        return std::any_of(str.begin(), str.end(),
+                    [](unsigned char c) {
+                        return std::islower(c);
+                    });
+    }
 }
