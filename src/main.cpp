@@ -1,3 +1,6 @@
+#define CATCH_CONFIG_MAIN
+#include "catch2/single_include/catch2/catch.hpp"
+
 #include <iostream>
 #include <array>
 #include <vector>
@@ -73,15 +76,10 @@ std::string to_titlecase(const std::string& text, const ExceptionWords& wordList
     return construct_string_from_vector(splitted_text);
 }
 
-int main() {
-    std::string text = "The point is to get more experience with ranges and the STL "
-                       "design an clear API and implement a library with expressive code. "
-                       "All of which are precious tools for everyday work.";
-
-    std::cout << "Sentence which will be Title Case'd:\n" << text
-              << "\n\n";
-
+TEST_CASE("A string is written in Title Case", "[title-case]") {
+    std::string text = "The point is to get more experience with ranges and the STL.";
     auto wordList = ExceptionWords();
-    std::cout << "Title Case'd sentence:\n" << to_titlecase(text, wordList, true);
-    return 0;
+
+    std::string titlecased_text = to_titlecase(text, wordList, false);
+    REQUIRE(titlecased_text == "The Point Is to Get More Experience With Ranges and the Stl.");
 }
