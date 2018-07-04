@@ -9,27 +9,7 @@
 #include <iterator>
 #include <initializer_list>
 
-class ExceptionWords {
-public:
-    std::vector<std::string> wordsToBeLeftInLowerCase;
-    ExceptionWords() {
-        wordsToBeLeftInLowerCase = {
-            "a", "an", "the", "at", "by", "for", "in", "of",
-                    "on", "to", "and", "as", "or"
-        };
-    }
-    explicit ExceptionWords(std::vector<std::string> newList) : wordsToBeLeftInLowerCase(newList) {}
-
-    void add(const std::string new_word) {
-        wordsToBeLeftInLowerCase.push_back(new_word);
-    }
-
-    void remove(const std::string& word_to_delete) {
-        wordsToBeLeftInLowerCase.erase(
-                std::find(wordsToBeLeftInLowerCase.begin(), wordsToBeLeftInLowerCase.end(),
-                          word_to_delete));
-    }
-};
+#include "liblettercase/ExceptionWords.h"
 
 std::vector<std::string> split(const std::string& s, char delimiter) {
     std::vector<std::string> tokens;
