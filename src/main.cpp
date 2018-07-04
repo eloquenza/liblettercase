@@ -25,6 +25,18 @@ std::string construct_string_from_vector(const std::vector<std::string>& vec) {
     return ret.str();
 }
 
+std::string to_titlecase(const std::string& text) {
+auto splitted_text = split(text, ' ');
+    for (std::string& str: splitted_text) {
+        std::transform(str.begin(), str.end(), str.begin(),
+                       [](unsigned char c) {
+                return std::tolower(c);
+            });
+        str[0] = std::toupper(str[0]);
+    }
+    return construct_string_from_vector(splitted_text);
+}
+
 int main() {
 
 }
