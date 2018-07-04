@@ -6,6 +6,18 @@
 #include <iterator>
 #include <initializer_list>
 
+class ExceptionWords {
+public:
+    std::vector<std::string> wordsToBeLeftInLowerCase;
+    ExceptionWords() {
+        wordsToBeLeftInLowerCase = {
+            "a", "an", "the", "at", "by", "for", "in", "of",
+                    "on", "to", "and", "as", "or"
+        };
+    }
+    explicit ExceptionWords(std::vector<std::string> newList) : wordsToBeLeftInLowerCase(newList) {}
+};
+
 std::vector<std::string> split(const std::string& s, char delimiter) {
     std::vector<std::string> tokens;
     std::string token;
@@ -25,15 +37,11 @@ std::string construct_string_from_vector(const std::vector<std::string>& vec) {
     return ret.str();
 }
 
-std::string to_titlecase(const std::string& text) {
-    auto wordsToBeLeftInLowerCase = {
-            "a", "an", "the", "at", "by", "for", "in", "of",
-            "on", "to", "and", "as", "or"
-    };
-
+std::string to_titlecase(const std::string& text, const ExceptionWords& wordList) {
     auto splitted_text = split(text, ' ');
+    auto& words_kept_in_lowercase = wordList.wordsToBeLeftInLowerCase;
     for (std::string& str: splitted_text) {
-        if (std::find(wordsToBeLeftInLowerCase.begin(), wordsToBeLeftInLowerCase.end(), str) != wordsToBeLeftInLowerCase.end())  {
+        if (std::find(words_kept_in_lowercase.begin(), words_kept_in_lowercase.end(), str) != words_kept_in_lowercase.end())  {
             continue;
         } else {
             std::transform(str.begin(), str.end(), str.begin(),
@@ -54,6 +62,7 @@ int main() {
     std::cout << "Sentence which will be Title Case'd:\n" << text
               << "\n\n";
 
-    std::cout << "Title Case'd sentence:\n" << to_titlecase(text);
+    auto wordList = ExceptionWords();
+    std::cout << "Title Case'd sentence:\n" << to_titlecase(text, wordList);
     return 0;
 }
