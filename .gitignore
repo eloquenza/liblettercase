@@ -106,6 +106,9 @@ report.html
 # netbeans files and directories?
 nbactions.xml
 
+# intelliJ project files
+.idea
+
 # Visual Studio files and directories
 *.opensdf
 *.sdf
