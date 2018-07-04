@@ -47,5 +47,13 @@ std::string to_titlecase(const std::string& text) {
 }
 
 int main() {
+    std::string text = "The point is to get more experience with ranges and the STL, "
+                       "design an clear API, and implement a library with expressive code. "
+                       "All of which are precious tools for everyday work.";
 
+    std::cout << "Sentence which will be Title Case'd:\n" << text
+              << "\n\n";
+
+    std::cout << "Title Case'd sentence:\n" << to_titlecase(text);
+    return 0;
 }
