@@ -10,28 +10,10 @@
 #include <initializer_list>
 
 #include "liblettercase/ExceptionWords.h"
-
-std::vector<std::string> split(const std::string& s, char delimiter) {
-    std::vector<std::string> tokens;
-    std::string token;
-    std::istringstream tokenStream(s);
-    while (std::getline(tokenStream, token, delimiter)) {
-        tokens.push_back(token);
-    }
-
-    return tokens;
-}
-
-std::string construct_string_from_vector(const std::vector<std::string>& vec) {
-    std::ostringstream ret;
-    std::copy(vec.begin(), vec.end()-1,
-              std::ostream_iterator<std::string>(ret, " "));
-    ret << vec.back();
-    return ret.str();
-}
+#include "liblettercase/helper_functions.h"
 
 std::string to_titlecase(const std::string& text, const ExceptionWords& wordList, bool keep_abbreviations) {
-    auto splitted_text = split(text, ' ');
+    auto splitted_text = lettercase::detail::split(text, ' ');
     auto& words_kept_in_lowercase = wordList.wordsToBeLeftInLowerCase;
     for (std::string& str: splitted_text) {
         if (keep_abbreviations) {
@@ -53,7 +35,7 @@ std::string to_titlecase(const std::string& text, const ExceptionWords& wordList
             str[0] = std::toupper(str[0]);
         }
     }
-    return construct_string_from_vector(splitted_text);
+    return lettercase::detail::construct_string_from_vector(splitted_text);
 }
 
 TEST_CASE("A string is converted to Title Case", "[title-case]") {
