@@ -36,4 +36,9 @@ namespace lettercase::detail {
                         return std::islower(c);
                     });
     }
+
+    bool is_in_exceptionlist(const ExceptionWords& wordList, const std::string& str) {
+        const auto& words_kept_in_lowercase = wordList.wordsToBeLeftInLowerCase;
+        return std::find(words_kept_in_lowercase.begin(), words_kept_in_lowercase.end(), str) != words_kept_in_lowercase.end();
+    }
 }
