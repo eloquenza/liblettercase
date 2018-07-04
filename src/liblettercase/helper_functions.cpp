@@ -8,21 +8,25 @@
 
 #include "liblettercase/helper_functions.h"
 
-std::vector<std::string> lettercase::detail::split(const std::string& s, char delimiter) {
-    std::vector<std::string> tokens;
-    std::string token;
-    std::istringstream tokenStream(s);
-    while (std::getline(tokenStream, token, delimiter)) {
-        tokens.push_back(token);
+namespace lettercase::detail {
+    using std::vector;
+    using std::string;
+    vector<string> split(const string& s, char delimiter) {
+        vector<string> tokens;
+        string token;
+        std::istringstream tokenStream(s);
+        while (std::getline(tokenStream, token, delimiter)) {
+            tokens.push_back(token);
+        }
+
+        return tokens;
     }
 
-    return tokens;
-}
-
-std::string lettercase::detail::construct_string_from_vector(const std::vector<std::string>& vec) {
-    std::ostringstream ret;
-    std::copy(vec.begin(), vec.end()-1,
-              std::ostream_iterator<std::string>(ret, " "));
-    ret << vec.back();
-    return ret.str();
+    string construct_string_from_vector(const vector<string>& vec) {
+        std::ostringstream ret;
+        std::copy(vec.begin(), vec.end()-1,
+                  std::ostream_iterator<string>(ret, " "));
+        ret << vec.back();
+        return ret.str();
+    }
 }
