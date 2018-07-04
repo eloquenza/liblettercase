@@ -6,6 +6,7 @@ packages/
 release/
 target/
 cache/
+cmake-build-debug/
 
 # Eclipse CDT output diretory
 Debug/
