@@ -49,12 +49,6 @@ set(LIB_HEADER ${INCLUDE_FOLDER}/liblettercase)
 set(EXTERNAL_LIBS ./external)
 set(CATCH2_MODULE ${EXTERNAL_LIBS}/catch2)
 
-set(SOURCES ${LIB_HEADER}/ExceptionWords.h ${LIB_SOURCES}/ExceptionWords.cpp
-        ${LIB_HEADER}/helper_functions.h ${LIB_SOURCES}/helper_functions.cpp
-        ${LIB_HEADER}/lettercase_conversions.h ${LIB_SOURCES}/lettercase_conversions.cpp)
-
-set(TEST_SOURCES ${TEST_FOLDER}/main.cpp ${TEST_FOLDER}/test_conversions.cpp)
-
 set(TEST_EXECUTABLE liblettercase-test)
 set(LIB_NAME lettercase)
 
