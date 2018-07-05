@@ -21,7 +21,7 @@ namespace lettercase {
                     return;
                 }
             }
-            if (is_in_exceptionlist(wordList, str))  {
+            if (is_in_exceptionlist(str, wordList))  {
                 return;
             } else {
                 std::transform(str.begin(), str.end(), str.begin(),
