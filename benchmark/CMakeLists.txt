@@ -1,0 +1,10 @@
+set(BENCHMARK_SOURCES ${BENCHMARK_FOLDER}/main.cpp)
+
+add_executable(${BENCHMARK_EXECUTABLE} ${BENCHMARK_SOURCES})
+
+target_include_directories(${BENCHMARK_EXECUTABLE} PRIVATE ${BENCHMARK_MODULE}/include)
+target_link_libraries(${BENCHMARK_EXECUTABLE} benchmark)
+target_link_libraries(${BENCHMARK_EXECUTABLE} lettercase)
+
+set_target_properties(${BENCHMARK_EXECUTABLE} PROPERTIES
+        OUTPUT_NAME ${BENCHMARK_EXECUTABLE}-${GIT_RELEASE_STRING})
