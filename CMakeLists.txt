@@ -1,11 +1,40 @@
 cmake_minimum_required(VERSION 3.11)
-project(liblettercase VERSION 1.0.0
+
+if(NOT GIT_RELEASE_STRING)
+    find_package(Git)
+    if (NOT Git_FOUND)
+        message(FATAL "git has not been found, please install git!")
+    endif()
+
+    execute_process(
+            COMMAND ${GIT_EXECUTABLE} describe --dirty
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            OUTPUT_VARIABLE GIT_RELEASE_STRING
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+endif()
+
+# faster way of splitting a version string
+# after regex replace, matches are safed in ${CMAKE_MATCH_n}, where n is 0 .. 9, 0 being the whole string
+# doing it this way makes the whole matching more efficient and, after understanding the trick
+# easier to understand and read
+string(REGEX REPLACE
+        "^([0-9]*)\\.([0-9]*)\\.([0-9]*).*"
+        "\\1"
+        THROWAWAY_VERSION_STRING
+        ${GIT_RELEASE_STRING})
+
+set(MAJOR_VERSION ${CMAKE_MATCH_1})
+set(MINOR_VERSION ${CMAKE_MATCH_2})
+set(PATCH_VERSION ${CMAKE_MATCH_3})
+
+project(liblettercase VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}
         DESCRIPTION "liblettercase provides letter case conversion functions")
 
-if( NOT CMAKE_BUILD_TYPE )
-    set( CMAKE_BUILD_TYPE Debug CACHE STRING
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Debug CACHE STRING
             "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
-            FORCE )
+            FORCE)
 endif()
 
 message("Build type currently set to ${CMAKE_BUILD_TYPE}")
