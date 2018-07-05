@@ -168,3 +168,6 @@ DartConfiguration.tcl
 
 # subversion directory pollution
 .svn/
+
+# local/personal/private project todo file
+todo.md
