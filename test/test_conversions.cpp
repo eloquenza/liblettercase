@@ -29,4 +29,7 @@ TEST_CASE("A string is converted to ...", "[lettercase, lettercase-conversions]"
     SECTION("... snake_case.") {
         REQUIRE(to_snake_case(text) == "The_point_is_to_get_more_experience_with_ranges_and_the_STL");
     }
+    SECTION("... CamelCase.") {
+        REQUIRE(to_camelcase(text) == "ThePointIsToGetMoreExperienceWithRangesAndTheSTL.");
+    }
 }
