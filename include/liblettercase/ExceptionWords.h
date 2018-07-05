@@ -7,15 +7,15 @@
 namespace lettercase {
     class ExceptionWords {
     public:
-        std::vector<std::string> wordsToBeLeftInLowerCase;
+        std::vector<std::string> wordList;
         ExceptionWords() {
-            wordsToBeLeftInLowerCase = {
+            wordList = {
                     "a", "an", "the", "at", "by", "for", "in", "of",
                     "on", "to", "and", "as", "or"
             };
         }
         explicit ExceptionWords(std::vector<std::string> newList) :
-                wordsToBeLeftInLowerCase(newList) {}
+                wordList(newList) {}
 
         void add(const std::string new_word);
         void remove(const std::string& word_to_delete);
