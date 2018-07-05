@@ -35,14 +35,6 @@ namespace lettercase::detail {
         return tokens;
     }
 
-    string construct_string_from_vector(const vector<string>& vec) {
-        std::ostringstream ret;
-        std::copy(vec.begin(), vec.end()-1,
-                  std::ostream_iterator<string>(ret, " "));
-        ret << vec.back();
-        return ret.str();
-    }
-
     string construct_string_from_vector(const vector<string>& vec, const char* new_delimiter) {
         std::ostringstream ret;
         std::copy(vec.begin(), vec.end()-1,
