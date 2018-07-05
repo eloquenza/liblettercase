@@ -39,10 +39,10 @@ namespace lettercase {
         auto splitted_text = split(text, ' ');
 
         for (std::string& str: splitted_text) {
-           std::transform(str.begin(), str.end(), str.begin(),
-                [](unsigned char c) {
-                    return std::tolower(c);
-           });
+            std::transform(str.begin(), str.end(), str.begin(),
+                           [](unsigned char c) {
+                               return std::tolower(c);
+                           });
         }
         return construct_string_from_vector(splitted_text);
     }
@@ -57,6 +57,44 @@ namespace lettercase {
                                return std::toupper(c);
                            });
         }
+        return construct_string_from_vector(splitted_text);
+    }
+
+    std::string to_snake_case(const std::string& text) {
+        using namespace lettercase::detail;
+        auto splitted_text = split(text, ' ');
+
+        for (std::string& str: splitted_text) {
+            str.erase(
+                    std::remove_if(str.begin(), str.end(), [](unsigned char c) {
+                        return std::ispunct(c);
+                    }),
+                    str.end()
+            );
+        }
+
+        return construct_string_from_vector(splitted_text, "_");
+    }
+
+    std::string to_camelcase(const std::string& text) {
+        using namespace lettercase::detail;
+        auto splitted_text = split(text, ' ');
+
+        for (std::string& str: splitted_text) {
+            str[0] = std::toupper(str[0]);
+        }
+
+        return construct_string_from_vector(splitted_text, "");
+    }
+
+    std::string to_startcase(const std::string& text) {
+        using namespace lettercase::detail;
+        auto splitted_text = split(text, ' ');
+
+        for (std::string& str: splitted_text) {
+            str[0] = std::toupper(str[0]);
+        }
+
         return construct_string_from_vector(splitted_text);
     }
 }

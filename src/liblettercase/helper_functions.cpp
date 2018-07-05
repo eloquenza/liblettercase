@@ -30,6 +30,14 @@ namespace lettercase::detail {
         return ret.str();
     }
 
+    string construct_string_from_vector(const vector<string>& vec, const char* new_delimiter) {
+        std::ostringstream ret;
+        std::copy(vec.begin(), vec.end()-1,
+                  std::ostream_iterator<string>(ret, new_delimiter));
+        ret << vec.back();
+        return ret.str();
+    }
+
     bool contains_any_lowercase(const string& str) {
         return std::any_of(str.begin(), str.end(),
                     [](unsigned char c) {
