@@ -86,4 +86,15 @@ namespace lettercase {
 
         return construct_string_from_vector(splitted_text, "");
     }
+
+    std::string to_startcase(const std::string& text) {
+        using namespace lettercase::detail;
+        auto splitted_text = split(text, ' ');
+
+        for (std::string& str: splitted_text) {
+            str[0] = std::toupper(str[0]);
+        }
+
+        return construct_string_from_vector(splitted_text);
+    }
 }

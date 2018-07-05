@@ -32,4 +32,7 @@ TEST_CASE("A string is converted to ...", "[lettercase, lettercase-conversions]"
     SECTION("... CamelCase.") {
         REQUIRE(to_camelcase(text) == "ThePointIsToGetMoreExperienceWithRangesAndTheSTL.");
     }
+    SECTION("... Start Case.") {
+        REQUIRE(to_startcase(text) == "The Point Is To Get More Experience With Ranges And The STL.");
+    }
 }
