@@ -1,4 +1,5 @@
-set(TEST_SOURCES ${TEST_FOLDER}/main.cpp ${TEST_FOLDER}/test_conversions.cpp)
+set(TEST_SOURCES ${TEST_FOLDER}/main.cpp ${TEST_FOLDER}/test_conversions.cpp
+        ${TEST_FOLDER}/test_helper_functions.cpp)
 
 add_executable(${TEST_EXECUTABLE} ${TEST_SOURCES})
 

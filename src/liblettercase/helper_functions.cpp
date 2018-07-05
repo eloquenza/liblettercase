@@ -15,7 +15,7 @@ namespace lettercase::detail {
 
     string conversion_loop(const string& text, std::function<void(string&)> body, const char* delimiter) {
         using namespace lettercase::detail;
-        auto splitted_text = split(text, ' ');
+        auto splitted_text = split(text, " ");
 
         for (string& str: splitted_text) {
             body(str);
@@ -24,11 +24,11 @@ namespace lettercase::detail {
         return construct_string_from_vector(splitted_text, delimiter);
     }
 
-    vector<string> split(const string& s, char delimiter) {
+    vector<string> split(const string& s, const char* delimiter) {
         vector<string> tokens;
         string token;
         std::istringstream tokenStream(s);
-        while (std::getline(tokenStream, token, delimiter)) {
+        while (std::getline(tokenStream, token, *delimiter)) {
             tokens.push_back(token);
         }
 
