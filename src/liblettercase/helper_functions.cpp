@@ -5,12 +5,25 @@
 #include <algorithm>
 #include <iterator>
 #include <initializer_list>
+#include <functional>
 
 #include "liblettercase/helper_functions.h"
 
 namespace lettercase::detail {
     using std::vector;
     using std::string;
+
+    string conversion_loop(const string& text, std::function<void(string&)> body, const char* delimiter) {
+        using namespace lettercase::detail;
+        auto splitted_text = split(text, ' ');
+
+        for (string& str: splitted_text) {
+            body(str);
+        }
+
+        return construct_string_from_vector(splitted_text, delimiter);
+    }
+
     vector<string> split(const string& s, char delimiter) {
         vector<string> tokens;
         string token;

@@ -11,18 +11,18 @@
 #include "liblettercase/helper_functions.h"
 
 namespace lettercase {
-    std::string to_titlecase(const std::string& text, const ExceptionWords& wordList, bool keep_abbreviations) {
-        using namespace lettercase::detail;
-        auto splitted_text = split(text, ' ');
+    using detail::conversion_loop;
 
-        for (std::string& str: splitted_text) {
+    std::string to_titlecase(const std::string& text, const ExceptionWords& wordList, bool keep_abbreviations) {
+        auto body = [&wordList, &keep_abbreviations](std::string& str) {
+            using namespace lettercase::detail;
             if (keep_abbreviations) {
                 if (!contains_any_lowercase(str)) {
-                    continue;
+                    return;
                 }
             }
             if (is_in_exceptionlist(wordList, str))  {
-                continue;
+                return;
             } else {
                 std::transform(str.begin(), str.end(), str.begin(),
                                [](unsigned char c) {
@@ -30,71 +30,57 @@ namespace lettercase {
                                });
                 str[0] = std::toupper(str[0]);
             }
-        }
-        return construct_string_from_vector(splitted_text);
+        };
+
+        return conversion_loop(text, body);
     }
 
     std::string to_lowercase(const std::string& text) {
-        using namespace lettercase::detail;
-        auto splitted_text = split(text, ' ');
+        auto body = [](std::string& str) {
+            std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) {
+                return std::tolower(c);
+            });
+        };
 
-        for (std::string& str: splitted_text) {
-            std::transform(str.begin(), str.end(), str.begin(),
-                           [](unsigned char c) {
-                               return std::tolower(c);
-                           });
-        }
-        return construct_string_from_vector(splitted_text);
+        return conversion_loop(text, body);
     }
 
     std::string to_uppercase(const std::string& text) {
-        using namespace lettercase::detail;
-        auto splitted_text = split(text, ' ');
+        auto body = [](std::string& str) {
+            std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) {
+                return std::toupper(c);
+            });
+        };
 
-        for (std::string& str: splitted_text) {
-            std::transform(str.begin(), str.end(), str.begin(),
-                           [](unsigned char c) {
-                               return std::toupper(c);
-                           });
-        }
-        return construct_string_from_vector(splitted_text);
+        return conversion_loop(text, body);
     }
 
     std::string to_snake_case(const std::string& text) {
-        using namespace lettercase::detail;
-        auto splitted_text = split(text, ' ');
-
-        for (std::string& str: splitted_text) {
+        auto body = [](std::string& str) {
             str.erase(
                     std::remove_if(str.begin(), str.end(), [](unsigned char c) {
                         return std::ispunct(c);
                     }),
                     str.end()
             );
-        }
+        };
 
-        return construct_string_from_vector(splitted_text, "_");
+        return conversion_loop(text, body, "_");
     }
 
     std::string to_camelcase(const std::string& text) {
-        using namespace lettercase::detail;
-        auto splitted_text = split(text, ' ');
-
-        for (std::string& str: splitted_text) {
+        auto body = [](std::string& str) {
             str[0] = std::toupper(str[0]);
-        }
+        };
 
-        return construct_string_from_vector(splitted_text, "");
+        return conversion_loop(text, body, "");
     }
 
     std::string to_startcase(const std::string& text) {
-        using namespace lettercase::detail;
-        auto splitted_text = split(text, ' ');
-
-        for (std::string& str: splitted_text) {
+        auto body = [](std::string& str) {
             str[0] = std::toupper(str[0]);
-        }
+        };
 
-        return construct_string_from_vector(splitted_text);
+        return conversion_loop(text, body);
     }
 }
