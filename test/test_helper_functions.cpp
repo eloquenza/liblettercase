@@ -57,7 +57,7 @@ TEST_CASE("A string can be splitted into a vector of strings", "[split]") {
 
 TEST_CASE("A word can be found in the exception list", "[exception-list]") {
     auto ew = ExceptionWords();
-    auto exceptionList = ew.wordsToBeLeftInLowerCase;
+    auto exceptionList = ew.wordList;
     std::string word = "and";
 
     REQUIRE(std::find(exceptionList.begin(), exceptionList.end(), word) != exceptionList.end());

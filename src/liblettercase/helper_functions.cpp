@@ -51,7 +51,7 @@ namespace lettercase::detail {
     }
 
     bool is_in_exceptionlist(const std::string& str, const ExceptionWords& wordList) {
-        const auto& words_kept_in_lowercase = wordList.wordsToBeLeftInLowerCase;
-        return std::find(words_kept_in_lowercase.begin(), words_kept_in_lowercase.end(), str) != words_kept_in_lowercase.end();
+        const auto& list = wordList.wordList;
+        return std::find(list.begin(), list.end(), str) != list.end();
     }
 }
