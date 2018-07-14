@@ -34,6 +34,7 @@ main() {
         do
             scriptname=$(basename "${file}")
             echo "Running $scriptname... "
+            builtin echo ""
             eval "${file}"
             script_exit_code=$?
             if [[ $script_exit_code != 0 ]]
@@ -41,6 +42,7 @@ main() {
                 echo "Script $scriptname has failed with exit code $script_exit_code."
                 hook_exit_code=${script_exit_code}
             fi
+            builtin echo ""
             echo "... finished $scriptname."
         done
         exit $hook_exit_code
