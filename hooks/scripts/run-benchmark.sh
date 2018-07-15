@@ -6,6 +6,13 @@ case "$2,$3" in
     *) echo "Not a merge commit. Exiting."; exit 0; ;;
 esac
 
+files_changed=$(git diff --cached --name-only)
+if [[ $(echo $files_changed | grep -svE "\.(cpp|h)$") ]]
+then
+    echo "No source file has been changed. No need to run benchmarks."
+    exit 0
+fi
+
 date=$(date +%Y-%m-%d)
 commit=$(git describe --dirty)
 
