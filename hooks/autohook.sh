@@ -35,7 +35,7 @@ main() {
             scriptname=$(basename "${file}")
             echo "Running $scriptname... "
             builtin echo ""
-            eval "${file}"
+            ${file} "$@"
             script_exit_code=$?
             if [[ $script_exit_code != 0 ]]
             then
