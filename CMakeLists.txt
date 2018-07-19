@@ -31,6 +31,10 @@ set(PATCH_VERSION ${CMAKE_MATCH_3})
 project(liblettercase VERSION ${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}
         DESCRIPTION "liblettercase provides letter case conversion functions")
 
+include(CheckIPOSupported)
+check_ipo_supported()
+set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE)
+
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Debug CACHE STRING
             "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
@@ -45,6 +49,8 @@ set(SOURCE_FOLDER ${PROJECT_SOURCE_DIR}/src)
 set(INCLUDE_FOLDER ${PROJECT_SOURCE_DIR}/include)
 set(TEST_FOLDER ${PROJECT_SOURCE_DIR}/test)
 set(BENCHMARK_FOLDER ${PROJECT_SOURCE_DIR}/benchmark)
+set(BINARY_FOLDER ${PROJECT_SOURCE_DIR}/bin)
+
 set(LIB_SOURCES ${SOURCE_FOLDER}/liblettercase)
 set(LIB_HEADER ${INCLUDE_FOLDER}/liblettercase)
 set(EXTERNAL_LIBS ${PROJECT_SOURCE_DIR}/external)
