@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-case "$2" in
+case "$2,$3" in
     merge,)
         ;;
     *) echo "Not a merge commit. Exiting."; exit 0; ;;
