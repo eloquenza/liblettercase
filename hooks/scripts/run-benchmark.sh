@@ -16,8 +16,7 @@ best_benchmark=$(find "$data_dir" -maxdepth 1 -type f -iname "best-bench*")
 binary_dir=$repo_root/bin
 benchmark_executable=$binary_dir/liblettercase-benchmarking
 
-old_benchmark_same_commit=$(find "$data_dir" -maxdepth 1 -type f -iname "*$3.json")
-echo "$old_benchmark_same_commit"
+old_benchmark_same_commit=$(find "$data_dir" -maxdepth 1 -type f -iname "*$commit.json")
 if [[ -f "$old_benchmark_same_commit" ]]
 then
     echo "Benchmark for this commit has already been run."
