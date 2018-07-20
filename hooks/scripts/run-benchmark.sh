@@ -1,17 +1,10 @@
 #! /usr/bin/env bash
 
-case "$2,$3" in
+case "$2" in
     merge,)
         ;;
     *) echo "Not a merge commit. Exiting."; exit 0; ;;
 esac
-
-files_changed=$(git diff --cached --name-only)
-if [[ $(echo $files_changed | grep -svE "\.(cpp|h)$") ]]
-then
-    echo "No source file has been changed. No need to run benchmarks."
-    exit 0
-fi
 
 date=$(date +%Y-%m-%d)
 commit=$(git describe --dirty)
@@ -22,6 +15,22 @@ benchmark_file=$data_dir/$date-bench-$commit.json
 best_benchmark=$(find "$data_dir" -maxdepth 1 -type f -iname "best-bench*")
 binary_dir=$repo_root/bin
 benchmark_executable=$binary_dir/liblettercase-benchmarking
+
+old_benchmark_same_commit=$(find "$data_dir" -maxdepth 1 -type f -iname "*$3.json")
+echo "$old_benchmark_same_commit"
+if [[ -f "$old_benchmark_same_commit" ]]
+then
+    echo "Benchmark for this commit has already been run."
+    exit 0;
+fi
+
+
+files_changed=$(git diff --cached --name-only)
+if [[ $(echo $files_changed | grep -svE "\.(cpp|h)$") ]]
+then
+    echo "No source file has been changed. No need to run benchmarks."
+    exit 0
+fi
 
 $benchmark_executable --benchmark_out_format=json --benchmark_out="$benchmark_file"
 benchmark_exit_code=$?
