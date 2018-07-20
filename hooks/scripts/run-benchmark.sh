@@ -16,7 +16,7 @@ best_benchmark=$(find "$data_dir" -maxdepth 1 -type f -iname "best-bench*")
 binary_dir=$repo_root/bin
 benchmark_executable=$binary_dir/liblettercase-benchmarking
 
-old_benchmark_same_commit=$(find "$data_dir" -maxdepth 1 -type f -iname "*$3.json")
+old_benchmark_same_commit=$(find "$data_dir" -maxdepth 1 -type f -iname "*$commit.json")
 echo "$old_benchmark_same_commit"
 if [[ -f "$old_benchmark_same_commit" ]]
 then
