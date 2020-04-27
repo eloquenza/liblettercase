@@ -1,0 +1,43 @@
+{
+  "context": {
+    "date": "2018-07-20 20:54:05",
+    "executable": "/home/eloquenza/development/personal/cpp/liblettercase/bin/liblettercase-benchmarking",
+    "num_cpus": 4,
+    "mhz_per_cpu": 3601,
+    "cpu_scaling_enabled": true,
+    "caches": [
+      {
+        "type": "Data",
+        "level": 1,
+        "size": 32000000,
+        "num_sharing": 1
+      },
+      {
+        "type": "Instruction",
+        "level": 1,
+        "size": 32000000,
+        "num_sharing": 1
+      },
+      {
+        "type": "Unified",
+        "level": 2,
+        "size": 256000000,
+        "num_sharing": 1
+      },
+      {
+        "type": "Unified",
+        "level": 3,
+        "size": 6144000000,
+        "num_sharing": 4
+      }
+    ],
+    "library_build_type": "release"
+  },
+  "benchmarks": [
+    {
+      "name": "BM_ToUpperCase",
+      "iterations": 351379,
+      "real_time": 1.8359444246823227e+03,
+      "cpu_time": 2.0650647534428640e+03,
+      "time_unit": "ns"
+    }
